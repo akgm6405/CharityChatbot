@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LiveChatWidgetModule } from '@livechat/widget-angular'
-
+import { FormsModule } from '@angular/forms';  // Import FormsModule here
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -11,7 +11,8 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,LiveChatWidgetModule
+    AppRoutingModule,LiveChatWidgetModule,
+    FormsModule // Add FormsModule to the imports array
   ],
   providers: [],
   bootstrap: [AppComponent]

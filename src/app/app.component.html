@@ -300,6 +300,98 @@
       visibility: hidden;
     }
   }
+
+/* app.component.css */
+
+
+/* app.component.css */
+.chat-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  max-height: 400px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  transition: height 0.3s ease;
+  z-index: 1000;
+}
+
+.chat-header {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px 8px 0 0;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  max-height: 300px; /* Limit the height of the messages area */
+}
+
+.message {
+  margin: 5px 0;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.user-message {
+  background-color: #d1e7dd; /* Light green */
+  align-self: flex-end; /* Align user messages to the right */
+}
+
+.bot-message {
+  background-color: #f8d7da; /* Light red */
+  align-self: flex-start; /* Align bot messages to the left */
+}
+
+.chat-input {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.chat-input button {
+  padding: 8px 16px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.chat-input button:hover {
+  background-color: #0056b3;
+}
+
+.slide-up {
+  height: 400px; /* Height when the chat is open */
+}
+
+.slide-up .chat-messages,
+.slide-up .chat-input {
+  display: block; /* Show messages and input when open */
+}
+
+
 </style>
 
 <!-- Toolbar -->
@@ -350,17 +442,40 @@
 
   </div>
 
-  <!-- <div>
-    <livechat-widget
-    license="12345678"
-    visibility="maximized"
-    (onNewEvent)="handleNewEvent($event)"
-  ></livechat-widget>
-  </div>  -->
 
-  <!-- app.component.html -->
+<!-- <div class="chat-widget" [ngClass]="{'slide-up': isChatOpen}">
+  <div class="chat-header" (click)="toggleChat()">
+    <h2>Chatbot</h2>
+    <span class="toggle-icon">{{ isChatOpen ? '-' : '+' }}</span>
+  </div>
+  <div class="chat-messages" *ngIf="isChatOpen">
+    <div *ngFor="let message of messages" class="message" [ngClass]="{'user-message': message.isUser, 'bot-message': !message.isUser}">
+      {{ message.text }}
+    </div>
+  </div>
+  <div class="chat-input" *ngIf="isChatOpen">
+    <input type="text" [(ngModel)]="userInput" (keypress)="onKeyPress($event)" placeholder="Type a message..." />
+    <button (click)="sendMessage(userInput)">Send</button>
+  </div>
+</div>  -->
 
-<livechat-widget license="12332502" group="0"></livechat-widget>
+<div class="chat-widget" [ngClass]="{'slide-up': isChatOpen}">
+  <div class="chat-header" (click)="toggleChat()">
+    <h2>Chatbot</h2>
+    <span class="toggle-icon">{{ isChatOpen ? '-' : '+' }}</span>
+  </div>
+  <div class="chat-messages" *ngIf="isChatOpen">
+    <div *ngFor="let message of messages; let i = index" class="message" [ngClass]="{'user-message': message.isUser, 'bot-message': !message.isUser}">
+      <p>{{ message.text }}</p>
+    </div>
+  </div>
+  <div class="chat-input" *ngIf="isChatOpen">
+    <input type="text" [(ngModel)]="userInput" (keypress)="onKeyPress($event)" placeholder="Type a message..." />
+    <button (click)="sendMessage(userInput)">Send</button>
+  </div>
+</div>
+
+
 
   <!-- Resources -->
   <h2>Resources</h2>
